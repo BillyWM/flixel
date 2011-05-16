@@ -1086,6 +1086,31 @@ package org.flixel
 				return false;
 			return setTileByIndex(Y * widthInTiles + X,Tile,UpdateGraphics);
 		}
+
+		/**
+		 * Change the data and graphic of many tiles in the tilemap at once
+		 * 
+		 * @param	X				The X coordinate of the tile (in tiles, not pixels).
+		 * @param	Y				The Y coordinate of the tile (in tiles, not pixels).
+		 * @param	Width			The width of the block of tiles
+		 * @param	Height			The height of the block of tiles
+		 * @param	Tile			The new integer data you wish to inject.
+		 * @param	UpdateGraphics	Whether the graphical representation of this tile should change.
+		 * 
+		 * @return	Whether or not the tiles were actually changed.
+		 */ 
+		public function setMany(X:uint,Y:uint,Width:uint,Height:uint,Tile:uint,UpdateGraphics:Boolean=true):Boolean
+		{
+			if((X + Width - 1 >= widthInTiles) || (Y + Height - 1 >= heightInTiles))
+				return false;
+			for (var ty:uint = 0; ty < Height; ty++) {
+				for (var tx:uint = 0; tx < Width; tx++) {
+					setTile(X + tx, Y + ty, Tile, true);
+				}
+			}
+			
+			return true;
+		}
 		
 		/**
 		 * Change the data and graphic of a tile in the tilemap.
