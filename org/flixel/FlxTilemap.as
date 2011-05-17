@@ -1094,18 +1094,23 @@ package org.flixel
 		 * @param	Y				The Y coordinate of the tile (in tiles, not pixels).
 		 * @param	Width			The width of the block of tiles
 		 * @param	Height			The height of the block of tiles
-		 * @param	Tile			The new integer data you wish to inject.
+		 * @param	Tiles			An array of tiles to inject. Provide as few as you want; the pattern will loop around
 		 * @param	UpdateGraphics	Whether the graphical representation of this tile should change.
 		 * 
 		 * @return	Whether or not the tiles were actually changed.
 		 */ 
-		public function setMany(X:uint,Y:uint,Width:uint,Height:uint,Tile:uint,UpdateGraphics:Boolean=true):Boolean
+		public function setMany(X:uint,Y:uint,Width:uint,Height:uint,Tiles:Array,UpdateGraphics:Boolean=true):Boolean
 		{
+			var i:uint = 0;
 			if((X + Width - 1 >= widthInTiles) || (Y + Height - 1 >= heightInTiles))
 				return false;
-			for (var ty:uint = 0; ty < Height; ty++) {
-				for (var tx:uint = 0; tx < Width; tx++) {
-					setTile(X + tx, Y + ty, Tile, true);
+			for (var ty:uint = 0; ty < Height; ty++)
+			{
+				for (var tx:uint = 0; tx < Width; tx++)
+				{
+					setTile(X + tx, Y + ty, Tiles[i++], true);
+					if (i > Tiles.length - 1)
+						i = 0;
 				}
 			}
 			
