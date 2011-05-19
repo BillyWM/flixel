@@ -367,7 +367,31 @@ package org.flixel
 				}
 			}
 		}
-		
+
+		/**
+		 * Execute the supplied function for every member of the group.
+		 * Currently only works on functions that have no required parameters.
+		 * 
+		 * @param	Func			A function to execute
+		 * @param	Recurse			Default value is true, meaning if <code>each()</code> encounters a member that is a group, it will call <code>each()</code> on that group rather than calling the group's function.
+		 */ 
+		public function each(Func:Function, Recurse:Boolean=true):void
+		{
+			var basic:FlxBasic;
+			var i:uint = 0;
+			while(i < length)
+			{
+				basic = members[i++] as FlxBasic;
+				if(basic != null)
+				{
+					if(Recurse && (basic is FlxGroup))
+						(basic as FlxGroup).each(Func,Recurse);
+					else
+						Func(basic);
+				}
+			}
+		}
+
 		/**
 		 * Call this function to retrieve the first object with exists == false in the group.
 		 * This is handy for recycling in general, e.g. respawning enemies.
