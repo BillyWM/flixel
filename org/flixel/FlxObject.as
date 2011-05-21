@@ -657,6 +657,17 @@ package org.flixel
 				{
 					pathAngle = FlxU.getAngle(_point,node);
 					FlxU.rotatePoint(0,pathSpeed,0,0,pathAngle,velocity);
+<<<<<<< HEAD
+=======
+				}
+				
+				//then set object rotation if necessary
+				if(_pathRotate)
+				{
+					angularVelocity = 0;
+					angularAcceleration = 0;
+					angle = pathAngle;
+>>>>>>> 3f4a6845dd5e8274d287c6fb1003f980ec5e628b
 				}
 
 				//then set object rotation if necessary
